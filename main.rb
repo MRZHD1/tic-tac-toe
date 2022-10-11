@@ -1,5 +1,4 @@
 require './board.rb'
-system(conf.echo=false)
 game = Game.new('X', 'O')
 
 puts "Welcome to a game of tic-tac-toe!"
