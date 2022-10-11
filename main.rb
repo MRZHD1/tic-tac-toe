@@ -1,11 +1,18 @@
 require './board.rb'
-board = Board.new('X', 'O')
+system(conf.echo=false)
+game = Game.new('X', 'O')
+
 puts "Welcome to a game of tic-tac-toe!"
-puts board.board
-until board.check
-  board.turn('X')
-  if board.check
+puts game.board
+
+until game.check
+
+  game.turn('X')
+
+  if game.check
     exit
   end
-  board.turn('O')
+
+  game.turn('O')
+
 end

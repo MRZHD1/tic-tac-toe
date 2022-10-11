@@ -1,12 +1,15 @@
-class Board
+class Game
+	
 	attr_accessor :board
+
 	def initialize(p1, p2)
 		@p1 = p1
 		@p2 = p2
 		@list = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-		@one, @two, @three, @four, @five, @six, @seven, @eight, @nine = @list
-		place('1', '1')
+		@one, @two, @three, @four, @five, @six, @seven, @eight, @nine = @list # Setting the template
+		place('1', '1') # Just initializes the 'board'
 	end
+
 	def turn(icon)
 		@icon = icon
 		pos = '0'
@@ -14,10 +17,11 @@ class Board
 			puts "Choose a number 1-9 for: #{icon}"
 			pos = gets.chomp
 		end
-		@list.delete_at(@list.index(pos.to_s))
+		@list.delete_at(@list.index(pos.to_s)) # Removes the move from available moves
 		place(icon, pos)
 		puts @board
 	end
+
 	private
 	def place(icon, pos)
 		case pos
@@ -38,7 +42,7 @@ class Board
 		when '8'
 			@eight = icon
 		when '9'
-			@nine= icon
+			@nine = icon
 		end
 		@board = """
 		.______.______.______
@@ -54,8 +58,9 @@ class Board
 		|  #{@seven}  ||  #{@eight}  ||  #{@nine}  |
 		|_____||_____||_____|"""
 	end
+
 	public
-	def check
+	def check # Checking if there's a win
 		value = [@one == @two && @two == @three,
 		@one == @four && @four == @seven,
 		@one == @five && @five == @nine,
@@ -68,11 +73,9 @@ class Board
 		if value
 			puts "Game over! #{@icon} won!"
 			return true
-		end
-		if @list.empty?
+		elsif @list.empty? # No more moves?
 			puts "Game over! It's a tie."
 			return true
 		end
 	end
 end
-
